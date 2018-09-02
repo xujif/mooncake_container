@@ -1,6 +1,16 @@
 ### DI(dependency injection)container for JavaScript and TypeScript.
 Only support node 9+ (suggest node 10), powered by [async_hooks](https://nodejs.org/api/async_hooks.html)
 
+## Notes
+```TypeScript
+// import Container class type
+import { Container } from 'async-hooks-container'
+
+import container from 'async-hooks-container'
+// import the global instance of Container (lazy initialize when first import)
+```
+
+
 Example:
 ```TypeScript
 const container = new Container()
