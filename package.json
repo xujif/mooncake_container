@@ -1,6 +1,6 @@
 {
   "name": "async-hooks-container",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "homepage": "https://github.com/xujif/async-hooks-container",
@@ -21,7 +21,7 @@
     "test": "mocha --require espower-typescript/guess src/tests/**/*.ts"
   },
   "dependencies": {
-    "async-hooks-map": "^1.0.1",
+    "async-hooks-map": "^1.2.0",
     "debug": "^3.1.0"
   },
   "devDependencies": {

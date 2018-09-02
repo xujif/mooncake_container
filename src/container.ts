@@ -247,6 +247,18 @@ export class Container implements ContainerResolver, ContainerBinder {
         }
     }
 
+
+    /**
+     * get the distance of scope which has the key
+     *
+     * @param {ID<any>} id
+     * @returns
+     * @memberof Container
+     */
+    distance (id: ID<any>) {
+        return this._map.distance(id)
+    }
+
     protected _bindLazy (scope: string, id: any, registion: Registion<any>) {
         if (!this._lazyBinds[scope]) {
             this._lazyBinds[scope] = new Map()
