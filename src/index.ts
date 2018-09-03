@@ -1,7 +1,9 @@
 import { Container } from './container';
-import * as Type from './types';
+import * as Types from './types';
 
-export { Type }
+export { Types }
+
+export { Types as Type }
 
 export { Container }
 export * from './decorators'
