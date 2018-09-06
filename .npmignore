@@ -1,4 +1,4 @@
 /node_modules
-/src
-/yarn-error.log
-/tsconfig.json
+/.vscode
+/package-lock.json
+/.gitignore

@@ -1,4 +1,5 @@
 import 'mocha';
+import 'reflect-metadata';
 
 import assert from 'assert';
 

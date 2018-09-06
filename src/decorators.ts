@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import {
     BindOption,
     Constructor,
@@ -34,26 +32,26 @@ export class BindMeta {
 }
 
 export function getBindMeta (target: Function) {
-    return Reflect.getMetadata(SYMBOL_BIND_META, target) as BindMeta | undefined
+    return (Reflect as any).getMetadata(SYMBOL_BIND_META, target) as BindMeta | undefined
 }
 function addBindAction (target: Function, action: BindMethod<any>) {
-    let meta = Reflect.getMetadata(SYMBOL_BIND_META, target) as BindMeta
+    let meta = (Reflect as any).getMetadata(SYMBOL_BIND_META, target) as BindMeta
     if (!meta) {
-        meta = new BindMeta()
-        Reflect.defineMetadata(SYMBOL_BIND_META, meta, target)
+        meta = new BindMeta();
+        (Reflect as any).defineMetadata(SYMBOL_BIND_META, meta, target)
     }
     meta.actions.push(action)
 }
 
 export function getDepencyMeta (target: Function) {
-    return Reflect.getMetadata(SYMBOL_INJECT_META, target) as DepencyMeta | undefined
+    return (Reflect as any).getMetadata(SYMBOL_INJECT_META, target) as DepencyMeta | undefined
 }
 
 export function updateDepencyMeta (target: Function, modifier: (meta: DepencyMeta) => void) {
-    let meta = Reflect.getMetadata(SYMBOL_INJECT_META, target) as DepencyMeta
+    let meta = (Reflect as any).getMetadata(SYMBOL_INJECT_META, target) as DepencyMeta
     if (!meta) {
-        meta = new DepencyMeta()
-        Reflect.defineMetadata(SYMBOL_INJECT_META, meta, target)
+        meta = new DepencyMeta();
+        (Reflect as any).defineMetadata(SYMBOL_INJECT_META, meta, target)
     }
     modifier(meta)
 }
@@ -87,9 +85,9 @@ export function Inject (id?: symbol | string | Function, opt: InjectOption = { r
         } else {
             let type: Function
             if (typeof prop === 'string') {
-                type = Reflect.getMetadata("design:type", target, prop)
+                type = (Reflect as any).getMetadata("design:type", target, prop)
             } else if (typeof prop === 'undefined' && typeof index === 'number') {
-                type = Reflect.getMetadata("design:paramtypes", target)[index]
+                type = (Reflect as any).getMetadata("design:paramtypes", target)[index]
             } else {
                 throw new InjectError('@Inject() is only availeble at constructor parameters or properties')
             }

@@ -1,8 +1,12 @@
 {
   "name": "async-hooks-container",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xujif/async-hooks-container.git"
+  },
   "homepage": "https://github.com/xujif/async-hooks-container",
   "description": "DI(dependency injection) container for JavaScript and TypeScript.",
   "keywords": [
@@ -34,10 +38,7 @@
     "reflect-metadata": "^0.1.12",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.8.0",
-    "tslint-config-standard": "^7.0.0",
+    "tslint-config-standard": "^8.0.0",
     "typescript": "*"
-  },
-  "peerDependencies": {
-    "reflect-metadata": "*"
   }
 }
