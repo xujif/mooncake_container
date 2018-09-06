@@ -1,12 +1,3 @@
-## Important!!
-
-## this package is rename to [@mooncake/container](https://github.com/xujif/mooncake_container)
-
-### please use [@mooncake/container](https://github.com/xujif/mooncake_container) instead !
-### please use [@mooncake/container](https://github.com/xujif/mooncake_container) instead ! 
-### please use [@mooncake/container](https://github.com/xujif/mooncake_container) instead !
-
-***
 
 ### DI(dependency injection)container for JavaScript and TypeScript.
 Only support node 9+ (suggest node 10), powered by [async_hooks](https://nodejs.org/api/async_hooks.html)
@@ -14,9 +5,9 @@ Only support node 9+ (suggest node 10), powered by [async_hooks](https://nodejs.
 ## Notes
 ```TypeScript
 // import Container class type
-import { Container } from 'async-hooks-container'
+import { Container } from '@mooncake/container'
 
-import container from 'async-hooks-container'
+import container from '@mooncake/container'
 // import the global instance of Container (lazy initialize when first import)
 ```
 

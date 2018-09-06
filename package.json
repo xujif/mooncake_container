@@ -1,15 +1,17 @@
 {
-  "name": "async-hooks-container",
-  "version": "1.0.8",
+  "name": "@mooncake/container",
+  "version": "1.0.9",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xujif/async-hooks-container.git"
+    "url": "https://github.com/xujif/mooncake_container.git"
   },
-  "homepage": "https://github.com/xujif/async-hooks-container",
+  "homepage": "https://github.com/xujif/mooncake_container",
   "description": "DI(dependency injection) container for JavaScript and TypeScript.",
   "keywords": [
+    "async-hooks-container",
+    "mooncake",
     "ioc",
     "DI",
     "container",
