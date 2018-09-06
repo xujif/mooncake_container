@@ -1,3 +1,13 @@
+## Important!!
+
+## this package is rename to [@mooncake/container](https://github.com/xujif/mooncake_container)
+
+### please use [@mooncake/container](https://github.com/xujif/mooncake_container) instead !
+### please use [@mooncake/container](https://github.com/xujif/mooncake_container) instead ! 
+### please use [@mooncake/container](https://github.com/xujif/mooncake_container) instead !
+
+***
+
 ### DI(dependency injection)container for JavaScript and TypeScript.
 Only support node 9+ (suggest node 10), powered by [async_hooks](https://nodejs.org/api/async_hooks.html)
 
