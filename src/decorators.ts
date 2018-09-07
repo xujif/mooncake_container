@@ -21,6 +21,7 @@ export interface DepencyResolver {
 
 
 export class DepencyMeta {
+    forceScope?: string
     constructorParams: { [k: number]: DepencyResolver } = {}
     props: { [k: string]: DepencyResolver } = {}
 }
@@ -56,6 +57,7 @@ export function updateDepencyMeta (target: Function, modifier: (meta: DepencyMet
     modifier(meta)
 }
 
+export type OptionalInjectOption = Pick<InjectOption, Exclude<keyof InjectOption, "required">>
 /**
  * Inject optional, undefined will be inject when can not resolve dependency
  * 
@@ -63,8 +65,15 @@ export function updateDepencyMeta (target: Function, modifier: (meta: DepencyMet
  * @param {ID<any>} [id] 
  * @returns 
  */
-export function InjectOptional (id?: ID<any>) {
-    return Inject(id, { required: false })
+export function InjectOptional (option?: ID<any> | (OptionalInjectOption & { id?: ID<any> })) {
+    if (!option) {
+        return Inject()
+    }
+    if (typeof option !== 'object') {
+        return Inject({ id: option, required: false })
+    } else {
+        return Inject(Object.assign(option, { required: false }))
+    }
 }
 
 /**
@@ -74,7 +83,15 @@ export function InjectOptional (id?: ID<any>) {
  * @param {ID<any>} [id] 
  * @returns 
  */
-export function Inject (id?: symbol | string | Function, opt: InjectOption = { required: true }) {
+export function Inject (option?: ID<any> | (InjectOption & { id?: ID<any> })) {
+    let id: symbol | string | Function | undefined
+    const opt: InjectOption = { required: true }
+    if (typeof option === 'object') {
+        id = option.id
+        Object.assign(opt, option)
+    } else if (option) {
+        id = option
+    }
     return function (target: any, prop?: any, index?: any) {
         let resolver !: DepencyResolver
         if (id) {
@@ -87,7 +104,7 @@ export function Inject (id?: symbol | string | Function, opt: InjectOption = { r
             if (typeof prop === 'string') {
                 type = (Reflect as any).getMetadata("design:type", target, prop)
             } else if (typeof prop === 'undefined' && typeof index === 'number') {
-                type = (Reflect as any).getMetadata("design:paramtypes", target)[index]
+                type = Reflect.getMetadata("design:paramtypes", target)[index]
             } else {
                 throw new InjectError('@Inject() is only availeble at constructor parameters or properties')
             }
@@ -105,6 +122,7 @@ export function Inject (id?: symbol | string | Function, opt: InjectOption = { r
             }
         }
         updateDepencyMeta(target, (meta) => {
+            meta.forceScope = opt.scope
             if (typeof prop === 'undefined' && typeof index === 'number') {
                 meta.constructorParams[index] = resolver
             } else {

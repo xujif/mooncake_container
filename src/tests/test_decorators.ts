@@ -6,7 +6,6 @@ import assert from 'assert';
 import { Container } from '../container';
 import { Alias, Factory, Implement, Inject, InjectOptional, InjectRaw, Service } from '../decorators';
 
-
 describe('container: decorectors', () => {
     class Test1 {
         token: number
@@ -15,15 +14,43 @@ describe('container: decorectors', () => {
         }
     }
 
+
     it('test decorectors: auto inject props', () => {
+
         class Test2 {
             @Inject()
             prop1!: Test1
         }
         const container = new Container()
+        const t1 = new Test1(11)
+        container.set(Test1, t1)
         const t2 = container.get(Test2)
         assert(!!t2.prop1, 'prop1 should be inject')
         assert(t2.prop1 instanceof Test1, 'check inject class')
+        assert.strictEqual(t2.prop1.token, 11, 'should equal')
+        container.aliasScope('scope1')
+
+    });
+
+    it('test decorectors: inject instance from special scope', (done) => {
+        const container = new Container()
+        container.set(Test1, new Test1(11))
+        container.aliasScope('scope1')
+        setImmediate(() => {
+            container.aliasScope('scope2')
+            container.set(Test1, new Test1(2))
+            class Test3 {
+                @Inject()
+                prop1!: Test1
+            }
+            assert.strictEqual(container.get(Test3).prop1.token, 2, 'shuold resolve prop from current scope')
+            class Test4 {
+                @Inject({ scope: 'scope1', required: true })
+                prop1!: Test1
+            }
+            assert.strictEqual(container.get(Test4).prop1.token, 11, 'shuold resolve prop from scope1')
+            done()
+        })
     });
 
     it('test decorectors: auto inject constructor ', () => {

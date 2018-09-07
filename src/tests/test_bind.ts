@@ -72,7 +72,6 @@ describe('container: bind and get', () => {
         const a1 = container.get(A)
         assert.equal(a1.t, 1, 'should equal, a is created by factory')
         const a2 = container.get(A)
-        console.log(a2)
         assert.equal(a2.t, 2, 'should equal, a is created by factory')
     });
 
@@ -98,7 +97,6 @@ describe('container: bind and get', () => {
         const a1 = container.get(A)
         assert.equal(a1.t, 1, 'should equal, a is create by factory')
         const a2 = container.get(A)
-        console.log(a2)
         assert.equal(a2, a1, 'should equal, a is singleton and created by factory')
     });
 

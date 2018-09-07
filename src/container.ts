@@ -212,7 +212,7 @@ export class Container implements ContainerResolver, ContainerBinder {
         for (let k of Object.keys(meta.props)) {
             if (!target[k]) {
                 const resolver = meta.props[k]
-                const value = resolver.resolve(this, fromScope)
+                const value = resolver.resolve(this, meta.forceScope || fromScope)
                 if (resolver.required && typeof value === 'undefined') {
                     throw new InjectError('cant resolve depency,bug target prop is required')
                 }
